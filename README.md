@@ -1,3 +1,4 @@
+## PABW - Zenifen Caesarof Agusti - 25523012
 Repo ini memuat pekerjaan mata kuliah Pengembangan Aplikasi
 Berbasis Web, satu folder untuk setiap pertemuan.
  
@@ -15,5 +16,5 @@ Topik halaman saya: bahasa pemrograman yang saya ingin pelajari.
  
 ## Catatan penggunaan AI
  
-Tulis bagian mana yang dibantu AI dan bagian mana yang Anda
-kerjakan sendiri, atau tulis: tidak memakai AI.
+Menggunakan AI = Melihat dokumentasi HTML yang lupa
+Tidak menggunakan AI = Membuat struktur tugas, git dan github, menulis beberapa code html
