@@ -1,57 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Next language to master. </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next language to master</title>
 </head>
 <body>
-    <body>
   <header>
-    <h1>Next language to master.</h1>
+    <h1>Next language to master</h1>
+    <p>
+      Saya adalah seorang developer yang ingin berkembang. Di halaman ini,
+      saya merencanakan beberapa bahasa pemrograman yang ingin saya kuasai untuk siap di Dunia Enterprise
+
     <nav aria-label="Navigasi utama">
       <ul>
-        <li><a href="#bagian-1">Planning</a></li>
-        <li><a href="#bagian-2">Reason</a></li>
-        <li><a href="#bagian-3">About</a></li>
+        <li><a href="#alasan">Reason</a></li>
+        <li><a href="#planning">Planning</a></li>
+        <li><a href="#about">About</a></li>
       </ul>
     </nav>
   </header>
- 
-  <main>
-    <section id="bagian-1">
-      <h2>Alasan saya</h2>
-      <table>
-  <caption>Judul tabel Anda</caption>
-  <thead>
-    <tr>
-      <th scope="col">Kolom 1</th>
-      <th scope="col">Kolom 2</th>
-      <th scope="col">Kolom 3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">Baris 1</th>
-      <td>Isi</td>
-      <td>Isi</td>
-    </tr>
-    <!-- tambahkan minimal dua baris lagi -->
-  </tbody>
-</table>
 
+  <main>
+    <section id="alasan">
+      <h2>Alasan saya</h2>
+      <p>
+        Mempelajari beberapa bahasa pemrograman membantu saya memahami cara
+        menyelesaikan masalah dengan pendekatan yang berbeda.
+      </p>
+
+      <table>
+        <caption>Target bahasa pemrograman yang ingin saya pelajari</caption>
+        <thead>
+          <tr>
+            <th scope="col">Target</th>
+            <th scope="col">Prioritas</th>
+            <th scope="col">Tujuan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Java</th>
+            <td>1</td>
+            <td>Memahami pemrograman berorientasi objek dan membangun aplikasi backend.</td>
+          </tr>
+          <tr>
+            <th scope="row">C#</th>
+            <td>2</td>
+            <td>Mengembangkan aplikasi menggunakan ekosistem .NET.</td>
+          </tr>
+          <tr>
+            <th scope="row">Go</th>
+            <td>3</td>
+            <td>Mempelajari bahasa yang sederhana, cepat, dan efisien untuk layanan backend.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <figure>
+        <img
+          src="zen.jpg"
+          alt="Ilustrasi suasana tenang yang mewakili fokus saat mempelajari bahasa pemrograman."
+          width="640"
+          height="360"
+          loading="lazy"
+        >
+        <figcaption>Fokus dan konsisten dalam mempelajari bahasa pemrograman.</figcaption>
+      </figure>
     </section>
- 
-    <section id="bagian-2">
+
+    <section id="planning">
       <h2>Planning saya</h2>
-      <!-- form Anda nanti di sini (Lembar E) -->
+      <p>
+        Saya akan belajar secara bertahap melalui dokumentasi, latihan kecil,
+        dan proyek sederhana.
+      </p>
+
+      <form action="/simpan" method="post">
+        <p>
+          <label for="bahasa-pemrograman">Bahasa pemrograman</label>
+          <input type="text" id="bahasa-pemrograman" name="bahasa-pemrograman" required>
+        </p>
+
+        <p>
+          <label for="prioritas">Prioritas</label>
+          <input type="number" id="prioritas" name="prioritas" min="1" max="3" required>
+        </p>
+
+        <p>
+          <label for="alasan">Alasan</label>
+          <textarea id="alasan" name="alasan" rows="4" required></textarea>
+        </p>
+
+        <button type="submit">Simpan rencana</button>
+      </form>
     </section>
   </main>
- 
-  <footer>
-    <p>Nama Anda · NIM Anda · 2026</p>
-  </footer>
-</body>
 
+  <footer id="about">
+    <p>Zenifen Caesarof Agusti · 25523012 · 2026</p>
+  </footer>
 </body>
 </html>
