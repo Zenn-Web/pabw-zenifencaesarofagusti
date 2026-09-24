@@ -8,10 +8,10 @@ Topik halaman saya: bahasa pemrograman yang saya ingin pelajari.
  
 - Judul halaman: Next language to master.
 - Deskripsi: Saya adalah seorang developer yang ingin berkembang. Disinilah saya memberikan bahasa pemrograman apa yang selanjutnya ingin ku kuasai agar knowledge ku berkembang.
-- Tautan navigasi: Target, Why? And goals, Priority
-- Dua bagian utama: Target yang ingin kucapai, Rencana belajarku
-- Kolom tabel: Bahasa pemrograman, sebab, tujuan
-- Kolom form: Target, sebab, tujuan
+- Tautan navigasi: Reason, Planning, About
+- Dua bagian utama: Alasan saya, Planning saya
+- Kolom tabel: Target, Prioritas, Tujuan
+- Kolom form: Bahasa pemrograman, Prioritas, Alasan
 - Gambar: zen.jpg
  
 ## Catatan penggunaan AI
