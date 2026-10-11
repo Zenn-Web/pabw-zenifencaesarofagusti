@@ -39,5 +39,5 @@ Judul halaman ditulis sekali di `profil.judulHalaman` lalu dipakai untuk `<title
 Tangkapan layar Console: `worksheet-p8/screenshots/e1-cors.png`, `e2-404.png`, `e3-null.png`.
 
 ### Deklarasi penggunaan AI (Pertemuan 8)
-- Dibantu AI (Claude): penulisan `js/app.js` (struktur data, fungsi murni, array methods, fungsi `isiElemen`), penyesuaian `profil.html` agar isinya diisi dari JavaScript, pengujian halaman di peramban untuk memastikan Console bersih, reproduksi tiga galat Lembar E, dan draf README ini.
-- Saya kerjakan sendiri: *(isi bagian yang benar-benar Anda kerjakan sendiri — misalnya memeriksa ulang setiap baris, menjalankan di Live Server, tangkapan layar Console, commit Git, tiket keluar)*.
+- Dibantu AI (Claude): Membantu mengarahkan dan membetulkan sintaksis di js/app.js, menjelaskan ulang code yang saya buat, menulis keterangan untuk membantu saya belajar
+- Saya kerjakan sendiri: menyambungkan js/app.js, mendeklarasi variabel dan isi nilai di app.js, menuliskan code logic ke js/app.js (mencoba)

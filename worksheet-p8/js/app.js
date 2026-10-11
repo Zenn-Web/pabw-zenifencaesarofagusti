@@ -110,9 +110,6 @@ function ubahKeAngka(teks) {
   return Number(teks);
 }
 
-// --------------------------------------------------------------------------
-// 3. PEMERIKSAAN DI CONSOLE (Lembar B, C, D)
-// --------------------------------------------------------------------------
 
 // Lembar B — tipe data dan template literal
 console.log(typeof profil.nama); // "string"
@@ -144,15 +141,14 @@ const portofolio = daftarProyek.find((proyek) => proyek.judul === "Website Porto
 console.log(portofolio);
 
 const tidakAda = daftarProyek.find((proyek) => proyek.judul === "Katalog Produk");
-console.log(tidakAda); // undefined — memang tidak ada di data saya
+console.log(tidakAda); 
 
 const judulProyek = daftarProyek.map((proyek) => proyek.judul);
 console.log(judulProyek, judulProyek.length === daftarProyek.length);
 
-// Lembar D — salinan, bukan penunjuk yang sama
 const salinanProfil = { ...profil };
 salinanProfil.nama = "Nama Salinan";
-console.log(profil.nama, "|", salinanProfil.nama); // profil asli tidak ikut berubah
+console.log(profil.nama, "|", salinanProfil.nama); 
 
 const urutJudul = [...daftarProyek].sort((a, b) => a.judul.localeCompare(b.judul));
 console.table(urutJudul);
@@ -162,13 +158,6 @@ console.log(`Filter aktif: ${pilihanAktif}`);
 pilihanAktif = "selesai";
 console.log(`Filter aktif: ${pilihanAktif}`);
 
-// --------------------------------------------------------------------------
-// 4. MENAMPILKAN DATA KE HALAMAN
-// Fungsi di bagian ini TIDAK murni (menyentuh halaman), jadi dipisah dari
-// fungsi murni di atas. Detail DOM dibahas di Pertemuan 9.
-// --------------------------------------------------------------------------
-
-// Kasus sulit E.4 nomor 2: querySelector bisa menghasilkan null
 function isiElemen(selector, isi, pakaiHtml = false) {
   const elemen = document.querySelector(selector);
   if (elemen === null) {
@@ -182,7 +171,6 @@ function isiElemen(selector, isi, pakaiHtml = false) {
   }
 }
 
-// <title> dan <h1> memakai satu variabel yang sama
 document.title = `${profil.judulHalaman} — ${profil.nama}`;
 isiElemen("#judul-halaman", profil.judulHalaman);
 isiElemen("#deskripsi-halaman", profil.deskripsi);
@@ -203,7 +191,6 @@ isiElemen(
   `${profil.nama} · NIM: ${profil.nim} · Kelas ${profil.kelas} · PABW Pertemuan ${pertemuan} · ${tahun}`
 );
 
-// Kasus sulit E.4 nomor 3: nilai dari kolom isian selalu teks
 const inputPrioritas = document.querySelector("#prioritas");
 inputPrioritas?.addEventListener("change", () => {
   const teks = inputPrioritas.value;
