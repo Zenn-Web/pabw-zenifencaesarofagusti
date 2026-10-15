@@ -21,7 +21,7 @@ const profil = {
   // Sengaja belum ada label "alamat" — dipakai untuk contoh akses aman ?.
 };
 
-const pertemuan = 8; // angka, bukan "8"
+const pertemuan = 9; // angka, bukan "8"
 const tahun = 2026;
 
 const daftarTarget = [
@@ -45,7 +45,7 @@ const daftarTarget = [
   },
 ];
 
-const daftarProyek = [
+export const daftarProyek = [
   { judul: "Halaman Profil", tahun: 2026, kategori: "kuliah", selesai: true, stack: ["HTML"] },
   { judul: "Design Token Profil", tahun: 2026, kategori: "kuliah", selesai: true, stack: ["CSS"] },
   { judul: "Profil Berbasis Data", tahun: 2026, kategori: "kuliah", selesai: false, stack: ["JavaScript"] },
@@ -184,7 +184,7 @@ isiElemen(
   "#ringkasan-proyek",
   `${hitungProyekSelesai(daftarProyek)} dari ${daftarProyek.length} proyek sudah selesai.`
 );
-isiElemen("#katalog-proyek", daftarProyek.map(buatKartuProyek).join(""), true);
+// Daftar proyek (#katalog-proyek) kini digambar oleh js/dom.js (Pertemuan 9)
 
 isiElemen(
   "#info-footer",
