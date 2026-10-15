@@ -5,7 +5,6 @@
 
 import { daftarProyek } from "./app.js";
 
-
 // --------------------------------------------------------------------------
 // Lembar A — memilih elemen (diuji di Console, tidak ada yang null)
 // --------------------------------------------------------------------------
@@ -16,6 +15,7 @@ const pesanKosong = document.querySelector("#pesan-kosong");
 const formRencana = document.querySelector("#form-rencana");
 const tombolSimpan = document.querySelector("#tombol-simpan");
 const statusForm = document.querySelector("#status-form");
+
 const labelKategori = { kuliah: "Tugas kuliah", pribadi: "Proyek pribadi" };
 
 // --------------------------------------------------------------------------
@@ -83,3 +83,63 @@ barisFilter.addEventListener("click", (event) => {
 });
 
 render(daftarProyek); // tampilan awal: semua proyek, tombol "Semua" sudah aktif dari HTML
+
+// --------------------------------------------------------------------------
+// Lembar D.2 — validasi formulir per kolom
+// --------------------------------------------------------------------------
+
+// Setiap aturan mengembalikan true bila kolom valid
+const aturan = {
+  "bahasa-pemrograman": (nilai) => nilai.trim() !== "",
+  prioritas: (nilai) => {
+    const angka = Number(nilai);
+    return nilai.trim() !== "" && Number.isInteger(angka) && angka >= 1 && angka <= 3;
+  },
+  "alasan-rencana": (nilai) => nilai.trim() !== "",
+};
+
+function periksaKolom(kolom) {
+  const valid = aturan[kolom.id](kolom.value);
+  const pembungkus = kolom.closest(".form-kolom");
+  pembungkus.classList.toggle("ada-galat", !valid);
+  if (valid) {
+    kolom.removeAttribute("aria-invalid");
+  } else {
+    kolom.setAttribute("aria-invalid", "true");
+  }
+  return valid;
+}
+
+const semuaKolom = Array.from(formRencana.querySelectorAll("input, textarea"));
+const semuaValid = () => semuaKolom.every((kolom) => aturan[kolom.id](kolom.value));
+
+// Dipasang sekali di induk form; 'input' menggelembung dari setiap kolom
+let sudahDicoba = false;
+formRencana.addEventListener("input", (event) => {
+  periksaKolom(event.target);
+  statusForm.textContent = "";
+  if (sudahDicoba) tombolSimpan.disabled = !semuaValid();
+});
+
+formRencana.addEventListener("submit", (event) => {
+  event.preventDefault(); // baris pertama: halaman tidak boleh dimuat ulang
+  sudahDicoba = true;
+
+  const hasil = semuaKolom.map(periksaKolom);
+  const kolomGagal = semuaKolom[hasil.indexOf(false)];
+  tombolSimpan.disabled = !semuaValid();
+
+  if (kolomGagal) {
+    kolomGagal.focus();
+    return;
+  }
+
+  const rencana = Object.fromEntries(
+    semuaKolom.map((kolom) => [kolom.name, kolom.value.trim()])
+  );
+  console.log("Rencana tersimpan:", rencana);
+  statusForm.textContent = `Rencana "${rencana["bahasa-pemrograman"]}" berhasil disimpan.`;
+  formRencana.reset();
+  sudahDicoba = false;
+  tombolSimpan.disabled = false;
+});

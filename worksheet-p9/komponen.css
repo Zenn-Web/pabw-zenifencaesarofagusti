@@ -73,8 +73,8 @@ button[type="submit"]:hover {
   outline-offset: 2px;
 }
 
-input:user-invalid,
-textarea:user-invalid {
+input[aria-invalid="true"],
+textarea[aria-invalid="true"] {
   border-color: var(--color-danger);
   border-width: 2px;
 }
@@ -86,8 +86,7 @@ textarea:user-invalid {
   font-weight: 500;
 }
 
-.form-kolom:has(input:user-invalid) .pesan-galat,
-.form-kolom:has(textarea:user-invalid) .pesan-galat {
+.form-kolom.ada-galat .pesan-galat {
   display: block;
 }
 
@@ -173,4 +172,15 @@ figcaption {
   border: 1px dashed var(--color-border);
   border-radius: var(--radius-md);
   font-weight: 600;
+}
+
+button[type="submit"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.status-form {
+  margin: 0;
+  font-weight: 600;
+  color: var(--color-primary);
 }
