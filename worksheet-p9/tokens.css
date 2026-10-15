@@ -1,0 +1,60 @@
+
+:root {
+  --lime-300: #86efac;
+  --lime-400: #4ade80;
+  --lime-500: #0aff1b;
+  --lime-600: #16a34a;
+  --lime-700: #15803d;
+  --lime-800: #166534;
+
+  --gray-50:  #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+  --gray-900: #0f172a;
+
+  --danger-500: #b00020;
+  --danger-300: #ff8a8a;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-full: 999px;
+
+  --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.10);
+  --shadow-2: 0 4px 6px -1px rgba(0, 0, 0, 0.10);
+
+  --text-sm:  0.875rem;
+  --text-md:  1rem;
+  --text-lg:  1.25rem;
+  --text-xl:  1.5rem;
+  --text-3xl: 2.25rem;
+}
+
+/* ==========================================================================
+   LAPIS 2 — Semantik: Peran dalam antarmuka. Mengacu pada lapis primitif.
+   Komponen HANYA boleh menggunakan token dari lapis ini.
+   ========================================================================== */
+:root {
+  --color-bg:         var(--gray-50);
+  --color-fg:         var(--gray-900);
+  --color-surface:    #ffffff;
+  --color-border:     var(--gray-300);
+  --color-primary:    var(--lime-700);
+  --color-on-primary: #ffffff;
+  --color-danger:     var(--danger-500);
+  --color-focus:      var(--color-primary);
+
+  --card-pad:         var(--space-4);
+  --section-gap:      var(--space-6);
+}
