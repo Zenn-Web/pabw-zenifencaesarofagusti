@@ -85,10 +85,27 @@ Diuji nyata: memuat (server lambat 6 detik, dicek di detik ke-1,5), berhasil (6 
 | Wadah dikosongkan sebelum render | ✔ `daftarRepoEl.textContent = ""` di baris pertama `renderRepo()`; jumlah kartu tetap 6 setelah dimuat |
 | Nama fungsi ekspor | `ambilRepo` |
 
+### Lembar E — kasus sulit
+
+Ketiga kasus direproduksi dengan merusak salinan sementara di luar folder proyek, jadi kode di `worksheet-p10/` tidak pernah rusak. Tangkapan layar ada di `screenshots/`.
+
+**E.4 Kasus yang saya temui**
+
+| Gejala yang saya lihat | Sebabnya | Cara memperbaiki |
+|---|---|---|
+| Tidak ada kartu. Halaman menampilkan `Gagal memuat repositori (daftar.forEach is not a function)`. Console memuat `status 404 ok false` dan baris 404 dari browser, tetapi pesan di halaman tidak menyebut 404. | Alamat salah menghasilkan status 404 dengan body `{"message":"Not Found"}`. Karena `fetch` tidak menolak untuk 404, body itu terbaca sebagai data (objek, bukan array), lalu `.forEach` gagal. Pesannya menyesatkan. | Pulihkan `if (!response.ok) throw new Error("status " + response.status)` sebelum `json()` (`js/api.js:18`) dan pemeriksaan `Array.isArray` (`js/api.js:21`). Pesan menjadi `status 404`. |
+| Judul, deskripsi, tabel target, dan katalog semuanya kosong. Console: `SyntaxError: Unexpected reserved word`. | `await` ditulis di fungsi biasa (`function ambilCepat()`) di `api.js`. File itu gagal di-parse, jadi `import` di `app.js` gagal, dan `dom.js` (yang mengimpor `app.js`) ikut berhenti. Tidak satu baris pun dari ketiga file berjalan. | Tambahkan `async` pada fungsinya, atau pindahkan `await` ke dalam fungsi `async` yang sudah ada. |
+| Konsol bersih, bagian "Repositori GitHub saya" hanya berisi judul, tanpa kartu dan tanpa pesan. | Respons valid berisi `[]`, dan cabang `daftar.length === 0` tidak ada di `renderRepo()`. Tidak ada galat yang bisa dibaca. | Pulihkan cabang kosong (`js/app.js:247`) yang menulis `Belum ada repositori publik.` dan keluar dari fungsi. |
+
+Tangkapan layar: `e1-404-dibaca-sebagai-data.png`, `e2-await-di-luar-async.png`, `e3-kosong-tanpa-pesan.png`.
+
+**Catatan tentang `await` di tingkat atas.** Contoh "salah" di worksheet (`const data = await fetch(URL)` di luar fungsi) hanya berupa galat parse pada skrip biasa. Di halaman ini skrip dimuat dengan `type="module"`, dan modul **mengizinkan** `await` di tingkat atas. Saya mencobanya: `api.js` dengan `const awal = await fetch(URL_API)` di tingkat atas tidak memunculkan galat apa pun, tetapi menahan seluruh halaman. Dengan server yang membalas 6 detik, judul dan seluruh isi halaman masih kosong di detik ke-2, Console bersih. Jadi gejalanya di modul adalah halaman yang diam dan lambat, bukan `SyntaxError`. Cara aman tetap sama: `await` di dalam fungsi `async` dan dipanggil dari pemanggil yang memegang `try/catch`.
+
+**Cek konfirmasi E:** alamat dirusak, jaringan API diblokir, dan data dikosongkan; ketiganya muncul sebagai pesan di halaman (lihat Lembar B.3 dan D.2), bukan layar putih.
+
 ### Belum dikerjakan
-- Lembar E (kasus sulit), Lembar F (daftar periksa, tangkapan layar empat keadaan, penilaian diri, exit ticket, deklarasi AI final).
-- Tangkapan layar belum diambil; folder `screenshots/` masih kosong.
+- Lembar F (daftar periksa, tangkapan layar empat keadaan, penilaian diri, exit ticket, deklarasi AI final).
 
 ### Deklarasi penggunaan AI (sementara, dilengkapi di Lembar F)
-- Dibantu AI (Claude): menulis `js/api.js`, blok render di `app.js`, perubahan HTML/CSS pendukung, menjalankan pengujian, dan mengisi README Lembar A–D.
+- Dibantu AI (Claude): menulis `js/api.js`, blok render di `app.js`, perubahan HTML/CSS pendukung, menjalankan pengujian, dan mengisi README Lembar A–E.
 - Saya kerjakan sendiri: (diisi di Lembar F)
