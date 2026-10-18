@@ -135,19 +135,30 @@ Tangkapan layar diambil lewat Chrome headless pada tema gelap, bukan lewat DevTo
 
 **F.3 Satu baris untuk diingat**
 
-Potongan kode: (diisi sendiri) — Dipakai pada: (diisi sendiri)
+Potongan kode: `if (!response.ok) throw new Error("status " + response.status);` — Dipakai pada: `js/api.js`, di dalam `ambilRepo()`, setelah `fetch` dan sebelum `json()`.
 
-**F.4 Penilaian diri**
+**F.4 Penilaian diri** (draf, nilai bisa kamu ubah)
 
-(diisi sendiri)
+| Bagian | Bobot | Nilai | Bukti |
+|---|---|---|---|
+| Alur data dan pengecekan status | 25 | 25 | `URL_API` di satu tempat (`api.js:9`); `response.ok` dicek sebelum body dibaca (`api.js:18`); `ambilRepo()` diekspor |
+| Pembacaan JSON dan pemisahan lapisan | 25 | 20 | `json()` dan `fetch` hanya di `api.js`; `JSON.stringify` belum dipakai di halaman, hanya dijelaskan di README |
+| Keadaan antarmuka | 20 | 20 | keempat keadaan muncul dan diuji; empat tangkapan layar `f-*.png` |
+| Penanganan galat | 20 | 20 | satu `try/catch` di `api.js`, kedua di `muatRepo()`; pesan tampil di halaman |
+| Kebersihan kode, deklarasi AI, dan bukti | 10 | 7 | batas `api.js`/`app.js` jelas, bukti lengkap; bagian "saya kerjakan sendiri" di deklarasi AI belum diisi |
+| **Total** | 100 | **92** | |
 
-**F.5 Exit ticket**
+**F.5 Exit ticket** (draf)
 
-(diisi sendiri)
+| Pertanyaan | Jawaban |
+|---|---|
+| Kenapa `fetch` tidak melempar galat untuk status 404? | `fetch` hanya menolak Promise bila permintaannya sendiri gagal (jaringan mati, alamat tak terjangkau, diblokir). Respons 404 tetap respons sah dari server, jadi Promise tetap resolve dan `response.ok` harus dicek sendiri. |
+| Di mana `await` boleh dipakai, dan di mana tidak? | Boleh di dalam fungsi `async` (`ambilRepo`, `muatRepo`). Di fungsi biasa file gagal di-parse (`SyntaxError`). Di `type="module"` `await` tingkat atas diizinkan tetapi menahan seluruh halaman, jadi tidak saya pakai. |
+| Keadaan antarmuka yang paling sering terlupa dan cara menutupnya | Keadaan kosong: respons `[]` tidak menimbulkan galat dan halaman tampak kosong. Saya tutup dengan cabang `daftar.length === 0` di `renderRepo()` yang menampilkan "Belum ada repositori publik." |
 
-**F.6 Catatan untuk dosen**
-
-(diisi sendiri)
+**F.6 Catatan untuk dosen** (draf)
+- Bagian tersulit: membedakan tiga kegagalan yang sama-sama tampak sebagai halaman diam (status 404 yang tidak melempar galat, `await` di luar fungsi `async`, dan respons kosong). Ketiganya tidak selalu memunculkan galat jelas di Console, jadi gejalanya harus dibaca dulu sebelum kode diubah.
+- Ingin dibahas di kelas berikutnya: worksheet menyebut `await` di luar fungsi `async` sebagai galat parse, tetapi di `type="module"` itu legal dan hanya menahan halaman. Juga, perlu atau tidak menangani batas 60 permintaan per jam API GitHub (status 403) secara khusus?
 
 ### Deklarasi penggunaan AI (Pertemuan 10)
 - Dibantu AI (Claude): menulis `js/api.js`, blok render dan empat keadaan di `js/app.js`, section HTML dan CSS pendukung, menjalankan pengujian di browser headless dan mengambil tangkapan layar, mereproduksi kasus Lembar E, serta menulis README ini.
