@@ -18,6 +18,7 @@ export async function ambilRepo() {
     if (!response.ok) throw new Error("status " + response.status);
 
     const data = await response.json();
+    if (!Array.isArray(data)) throw new Error("bentuk data bukan array"); // periksa bentuk sebelum dipakai
     return data;
   } catch (error) {
     console.error("gagal memuat", error.message);
