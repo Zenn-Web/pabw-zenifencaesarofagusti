@@ -31,6 +31,7 @@
           <li><a href="#alasan">Reason</a></li>
           <li><a href="#katalog-bahasa">Katalog</a></li>
           <li><a href="#proyek">Proyek</a></li>
+          <li><a href="#repositori">Repositori</a></li>
           <li><a href="#planning">Planning</a></li>
           <li><a href="#about">About</a></li>
         </ul>
@@ -94,6 +95,17 @@
       <!-- Kartu dibuat dari array daftarProyek oleh js/dom.js -->
       <div class="katalog" id="katalog-proyek" aria-live="polite"></div>
       <p class="pesan-kosong" id="pesan-kosong" hidden></p>
+    </section>
+
+    <section id="repositori">
+      <h2>Repositori GitHub saya</h2>
+      <p>Daftar ini diambil langsung dari API publik GitHub (js/api.js), bukan ditulis di halaman.</p>
+
+      <!-- Satu paragraf untuk empat keadaan: memuat, galat, kosong, berhasil (js/app.js) -->
+      <p class="status-muat" id="status-repo" role="status" aria-live="polite" hidden></p>
+
+      <!-- Kartu dibuat dari hasil ambilRepo() oleh js/app.js -->
+      <div class="katalog" id="daftar-repo"></div>
     </section>
 
     <section id="planning">

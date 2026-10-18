@@ -4,6 +4,8 @@
 // sekali di sini. Untuk mengubah isi halaman, ubah data di bagian 1 saja.
 // ==========================================================================
 
+import { ambilRepo } from "./api.js"; // Pertemuan 10: satu-satunya jalan data dari jaringan
+
 // --------------------------------------------------------------------------
 // 1. DATA (Lembar B & D) — semuanya const karena tidak ditunjuk ulang
 // --------------------------------------------------------------------------
@@ -21,7 +23,7 @@ const profil = {
   // Sengaja belum ada label "alamat" — dipakai untuk contoh akses aman ?.
 };
 
-const pertemuan = 9; // angka, bukan "8"
+const pertemuan = 10; // angka, bukan "8"
 const tahun = 2026;
 
 const daftarTarget = [
@@ -197,3 +199,75 @@ inputPrioritas?.addEventListener("change", () => {
   const angka = ubahKeAngka(teks);
   console.log(`Tanpa Number(): ${teks + 1} | Dengan Number(): ${angka + 1}`);
 });
+
+// --------------------------------------------------------------------------
+// Pertemuan 10 (Lembar D) — data dari jaringan: memuat, berhasil, gagal, kosong
+// app.js tidak menyentuh jaringan; ia hanya memakai ambilRepo() dari js/api.js.
+// --------------------------------------------------------------------------
+
+const daftarRepoEl = document.querySelector("#daftar-repo");
+const statusRepo = document.querySelector("#status-repo");
+
+// Satu paragraf status dipakai bergantian oleh keempat keadaan
+function tampilkanStatus(teks, keadaan) {
+  statusRepo.textContent = teks;
+  statusRepo.dataset.state = keadaan;
+  statusRepo.hidden = teks === "";
+}
+
+// Satu objek repo → satu kartu. Semua teks dari jaringan lewat textContent.
+function buatKartuRepo(repo) {
+  const kartu = document.createElement("article");
+  kartu.className = "kartu";
+
+  const lencana = document.createElement("span");
+  lencana.className = "lencana";
+  lencana.textContent = repo.language ?? "Tanpa bahasa"; // language bisa null
+
+  const judul = document.createElement("h3");
+  const tautan = document.createElement("a");
+  tautan.href = repo.html_url;
+  tautan.textContent = repo.name;
+  judul.append(tautan);
+
+  const deskripsi = document.createElement("p");
+  deskripsi.textContent = repo.description ?? "Belum ada deskripsi."; // description sering null
+
+  const info = document.createElement("p");
+  const tanggal = new Date(repo.pushed_at).toLocaleDateString("id-ID", { dateStyle: "medium" });
+  info.textContent = `★ ${repo.stargazers_count} · diperbarui ${tanggal}`;
+
+  kartu.append(lencana, judul, deskripsi, info);
+  return kartu;
+}
+
+function renderRepo(daftar) {
+  daftarRepoEl.textContent = ""; // kosongkan dulu supaya kartu tidak berlipat
+
+  if (daftar.length === 0) { // respons valid tetapi tanpa isi
+    tampilkanStatus("Belum ada repositori publik.", "kosong");
+    return;
+  }
+
+  tampilkanStatus("", "berhasil");
+  const wadah = document.createDocumentFragment();
+  daftar.forEach((repo) => wadah.append(buatKartuRepo(repo)));
+  daftarRepoEl.append(wadah);
+}
+
+// Try/catch kedua: menangkap galat yang dilempar ambilRepo() dan menampilkannya di halaman
+async function muatRepo() {
+  daftarRepoEl.textContent = "";
+  tampilkanStatus("Memuat repositori…", "memuat");
+  try {
+    const daftar = await ambilRepo();
+    renderRepo(daftar);
+  } catch (error) {
+    tampilkanStatus(
+      `Gagal memuat repositori (${error.message}). Periksa koneksi, lalu muat ulang halaman.`,
+      "gagal"
+    );
+  }
+}
+
+muatRepo(); // satu baris pemanggil

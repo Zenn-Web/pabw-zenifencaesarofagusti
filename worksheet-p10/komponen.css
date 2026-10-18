@@ -184,3 +184,16 @@ button[type="submit"]:disabled {
   font-weight: 600;
   color: var(--color-primary);
 }
+
+/* Status pemuatan data dari jaringan (Pertemuan 10) */
+.status-muat {
+  padding: var(--space-4);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+}
+
+.status-muat[data-state="gagal"] {
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
