@@ -29,3 +29,7 @@
 
 Console menampilkan `status 200 ok true` tanpa teks merah.
 
+### Lembar B — async/await dan satu try/catch
+
+`ambilRepo()` adalah `async function`; seluruh langkahnya (`fetch` → cek `response.ok` → `json()` → cek bentuk) ada dalam satu `try/catch`. `catch` mencatat galat lalu melemparnya lagi (`throw error`), dan `try/catch` kedua di pemanggil (dipasang di Lembar D) akan menampilkan pesannya di halaman.
+
