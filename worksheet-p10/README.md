@@ -103,9 +103,52 @@ Tangkapan layar: `e1-404-dibaca-sebagai-data.png`, `e2-await-di-luar-async.png`,
 
 **Cek konfirmasi E:** alamat dirusak, jaringan API diblokir, dan data dikosongkan; ketiganya muncul sebagai pesan di halaman (lihat Lembar B.3 dan D.2), bukan layar putih.
 
-### Belum dikerjakan
-- Lembar F (daftar periksa, tangkapan layar empat keadaan, penilaian diri, exit ticket, deklarasi AI final).
+### Lembar F — pemeriksaan
 
-### Deklarasi penggunaan AI (sementara, dilengkapi di Lembar F)
-- Dibantu AI (Claude): menulis `js/api.js`, blok render di `app.js`, perubahan HTML/CSS pendukung, menjalankan pengujian, dan mengisi README Lembar A–E.
-- Saya kerjakan sendiri: (diisi di Lembar F)
+**F.1 Periksa satu per satu**
+
+| Pemeriksaan | Cara memeriksa | Lulus |
+|---|---|---|
+| Alamat di satu tempat | `const URL_API` di baris teratas `js/api.js`; tidak ada alamat lain di `js/` | ☑ |
+| `response.ok` dicek | `js/api.js:18`, sebelum `json()` | ☑ |
+| Galat tertangkap | permintaan ke API diblokir lalu halaman dimuat: pesan galat tampil, Console tanpa galat tak tertangani | ☑ |
+| Keadaan memuat muncul | server uji dengan balasan 6 detik: `Memuat repositori…` tampil. Belum dicoba dengan throttling di panel Network | ☑ |
+| Keadaan kosong muncul | respons `[]` menampilkan `Belum ada repositori publik.`. `render([])` tidak bisa dipanggil dari Console karena `renderRepo` ada di dalam modul, jadi saya memakai respons kosong | ☑ |
+| Data tampil sebagai elemen | 6 `article.kartu` di `#daftar-repo`; semua teks lewat `textContent` | ☑ |
+| Batas lapisan terjaga | kata `fetch` hanya ada di `js/api.js` (hasil pencarian di folder `js/`) | ☑ |
+| Tidak ada galat di Console | pemuatan sukses hanya menghasilkan log; tidak ada `error` | ☑ |
+| Deklarasi AI | bagian AI sudah ditulis di bawah; bagian "saya kerjakan sendiri" harus diisi sendiri | ☐ |
+| Orisinalitas | topik dan isi halaman ini milik saya sendiri | ☐ (diisi sendiri) |
+
+Catatan: `innerHTML` masih dipakai di `isiElemen(..., true)` di `app.js` (warisan Pertemuan 8) untuk data statis yang ditulis sendiri di halaman. Data dari jaringan tidak melewatinya.
+
+**F.2 Bukti empat keadaan** (folder `screenshots/`)
+
+| Keadaan | Berkas | Catatan |
+|---|---|---|
+| Berhasil | `f-berhasil.png` | 6 kartu repositori dari API GitHub |
+| Gagal | `f-gagal.png` | permintaan ke API diblokir: `Failed to fetch` |
+| Kosong | `f-kosong.png` | respons `[]` dari `kosong.json` lokal |
+| Memuat | `f-memuat.png` | server uji membalas setelah 6 detik, dipotret di detik ke-1,5 |
+
+Tangkapan layar diambil lewat Chrome headless pada tema gelap, bukan lewat DevTools.
+
+**F.3 Satu baris untuk diingat**
+
+Potongan kode: (diisi sendiri) — Dipakai pada: (diisi sendiri)
+
+**F.4 Penilaian diri**
+
+(diisi sendiri)
+
+**F.5 Exit ticket**
+
+(diisi sendiri)
+
+**F.6 Catatan untuk dosen**
+
+(diisi sendiri)
+
+### Deklarasi penggunaan AI (Pertemuan 10)
+- Dibantu AI (Claude): menulis `js/api.js`, blok render dan empat keadaan di `js/app.js`, section HTML dan CSS pendukung, menjalankan pengujian di browser headless dan mengambil tangkapan layar, mereproduksi kasus Lembar E, serta menulis README ini.
+- Saya kerjakan sendiri: (diisi sendiri; worksheet meminta bagian ini jujur dan spesifik)
