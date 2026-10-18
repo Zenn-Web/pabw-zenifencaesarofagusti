@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Isi judul diisi oleh js/app.js dari objek profil -->
+  <title>Memuat profil…</title>
+  <!-- Ikon kosong supaya Console tidak menampilkan 404 favicon.ico -->
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="layout.css">
+  <link rel="stylesheet" href="komponen.css">
+  <link rel="stylesheet" href="tema.css">
+</head>
+<body>
+  <header>
+    <input type="checkbox" id="tema" class="pengalih-tema">
+    <label for="tema" class="tombol-tema">Tema gelap</label>
+
+    <div class="header-baris">
+      <div class="header-info">
+        <h1 id="judul-halaman"></h1>
+        <p id="deskripsi-halaman"></p>
+        <p id="perkenalan" class="perkenalan"></p>
+        <p id="daftar-keahlian" class="daftar-keahlian"></p>
+      </div>
+
+      <nav aria-label="Navigasi utama">
+        <ul>
+          <li><a href="#alasan">Reason</a></li>
+          <li><a href="#katalog-bahasa">Katalog</a></li>
+          <li><a href="#proyek">Proyek</a></li>
+          <li><a href="#planning">Planning</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="alasan">
+      <h2>Alasan saya</h2>
+      <p>
+        Mempelajari beberapa bahasa pemrograman membantu saya memahami cara
+        menyelesaikan masalah dengan pendekatan yang berbeda.
+      </p>
+
+      <table>
+        <caption>Target bahasa pemrograman yang ingin saya pelajari</caption>
+        <thead>
+          <tr>
+            <th scope="col">Target</th>
+            <th scope="col">Prioritas</th>
+            <th scope="col">Tujuan</th>
+          </tr>
+        </thead>
+        <!-- Baris tabel dibuat dari array daftarTarget di js/app.js -->
+        <tbody id="tabel-target"></tbody>
+      </table>
+
+      <figure>
+        <img
+          src="zen.jpg"
+          alt="Ilustrasi suasana tenang yang mewakili fokus saat mempelajari bahasa pemrograman."
+          width="640"
+          height="360"
+          loading="lazy"
+        >
+        <figcaption>Fokus dan konsisten dalam mempelajari bahasa pemrograman.</figcaption>
+      </figure>
+    </section>
+
+    <section id="katalog-bahasa">
+      <h2>Katalog Target Belajar</h2>
+      <p>Representasi baris target belajar dalam bentuk katalog kartu responsif yang membungkus secara otomatis.</p>
+
+      <!-- Kartu dibuat dari array daftarTarget di js/app.js -->
+      <div class="katalog" id="katalog-target"></div>
+    </section>
+
+    <section id="proyek">
+      <h2>Proyek saya</h2>
+      <p id="ringkasan-proyek"></p>
+
+      <!-- Satu pendengar di induk #filter melayani semua tombol (js/dom.js) -->
+      <div class="filter" id="filter" role="group" aria-label="Saring proyek berdasarkan kategori">
+        <button type="button" class="active" data-category="semua">Semua</button>
+        <button type="button" data-category="kuliah">Kuliah</button>
+        <button type="button" data-category="pribadi">Pribadi</button>
+        <button type="button" data-category="magang">Magang</button>
+      </div>
+
+      <!-- Kartu dibuat dari array daftarProyek oleh js/dom.js -->
+      <div class="katalog" id="katalog-proyek" aria-live="polite"></div>
+      <p class="pesan-kosong" id="pesan-kosong" hidden></p>
+    </section>
+
+    <section id="planning">
+      <h2>Planning saya</h2>
+      <p>
+        Saya akan belajar secara bertahap melalui dokumentasi resmi, latihan proyek kecil,
+        dan implementasi studi kasus nyata.
+      </p>
+
+      <form id="form-rencana" action="/simpan" method="post" novalidate>
+        <div class="form-kolom">
+          <label for="bahasa-pemrograman">Bahasa pemrograman</label>
+          <input type="text" id="bahasa-pemrograman" name="bahasa-pemrograman" required>
+          <span class="pesan-galat" id="galat-bahasa-pemrograman">Kolom bahasa pemrograman wajib diisi.</span>
+        </div>
+
+        <div class="form-kolom">
+          <label for="prioritas">Prioritas (1 - 3)</label>
+          <input type="number" id="prioritas" name="prioritas" min="1" max="3" required>
+          <span class="pesan-galat" id="galat-prioritas">Prioritas wajib berupa angka antara 1 sampai 3.</span>
+        </div>
+
+        <div class="form-kolom">
+          <label for="alasan-rencana">Alasan pemilihan</label>
+          <textarea id="alasan-rencana" name="alasan" rows="4" required></textarea>
+          <span class="pesan-galat" id="galat-alasan-rencana">Alasan pemilihan wajib diisi sebelum menyimpan rencana.</span>
+        </div>
+
+        <button type="submit" id="tombol-simpan">Simpan rencana</button>
+        <p class="status-form" id="status-form" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer id="about">
+    <p id="info-footer"></p>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/dom.js"></script>
+</body>
+</html>
