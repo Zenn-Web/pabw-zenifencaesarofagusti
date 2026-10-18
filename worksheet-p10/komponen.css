@@ -197,3 +197,13 @@ button[type="submit"]:disabled {
   border-color: var(--color-danger);
   color: var(--color-danger);
 }
+
+/* Tautan pada judul kartu mengikuti warna tema, bukan biru bawaan browser */
+.kartu h3 a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.kartu h3 a:hover {
+  text-decoration: underline;
+}
